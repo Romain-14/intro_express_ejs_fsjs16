@@ -1,5 +1,6 @@
 <header>
     <h1>welcome to my amazing website</h1>
-    <a href="/">home</a>
-    <a href="/blog">blog</a>
+    <!-- une petite ternaire dans la class pour vérifier sur quel page on se trouve afin d'y affecter la valeur active qui correspond à une propriété css pour agir sur le design -->
+    <a href="/" class=<%= template === "home" ? "active" : null %>>home</a>
+    <a href="/blog" class=<%= template === "blog" ? "active" : null %>>blog</a>
 </header>

@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname + '/public')));
 /******************/
 
 // ROUTES 
-// on chaine les méthodes (verbe get ici) sur l'instance de app pour retourner une response de "rendu" qui contiendra la page à afficher à réception de la request enovyé par le header  
+// on chaine les méthodes (verbe get ici) sur l'instance de app pour retourner une response de "rendu" qui contiendra la page à afficher à réception de la requête envoyée par le header  
 app.get("/", (req, res, next) =>{
     res.render("layout", {template: "home", data : "jako"});
 });
@@ -27,6 +27,7 @@ app.get("/blog", (req, res, next) =>{
     res.render("layout", {template: "blog"});
 })
 
+// on utilise la méthode listen sur l'instance app pour écouter et lancer notre serveur sur le port 9000
 app.listen(9000, ()=>{
     console.log(`Listening at http://localhost:9000`);
 })
