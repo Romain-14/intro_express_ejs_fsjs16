@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+    <!-- include permets d'inclure un fichier ejs à cet emplacement, url qui est relatif où on se trouve
+    je suis dans layout.ejs je souhaite injecter le fichier header
+    attention à la syntaxe ejs ici c'est un tiret du 6 -->
     <%- include("./partials/header") %>
+    <!-- ici on injecte la valeur de la variable transmise par l'objet render -->
     <%- include(template) %>
     <%- include("./partials/footer") %>
 </body>
