@@ -1,5 +1,10 @@
 import express from 'express';
 const app = express();
+//importer la librairie qui permets d'accéder aux variables d'environnement de notre appli'
+import 'dotenv/config';
+
+import {PORT} from './lib/index.js';
+import POOL from './database/db.js';
 
 // configuration du moteur de rendu ejs
 // on spécifie le lieu des pages à afficher
@@ -19,8 +24,13 @@ app.use(express.static(path.join(__dirname + '/public')));
 
 // ROUTES 
 // on chaine les méthodes (verbe get ici) sur l'instance de app pour retourner une response de "rendu" qui contiendra la page à afficher à réception de la requête envoyée par le header  
-app.get("/", (req, res, next) =>{
-    res.render("layout", {template: "home", data : "jako"});
+app.get("/", async (req, res, next) =>{
+    // en arrivant sur la pag home( le "/" ) on effectue une requête vers la BDD
+    // en utilisant cette librairie le résultat est envoyé dans un tableau multiple, on le déstructure pour avoir les données qui nous intéressent
+    const [result] = await POOL.execute(`SELECT * FROM productLines`);
+    console.log(result);
+    // et on transmets via un objet dans notre home ce résultat
+    res.render("layout", {template: "home", datas : result});
 });
 
 app.get("/blog", (req, res, next) =>{
@@ -28,6 +38,6 @@ app.get("/blog", (req, res, next) =>{
 })
 
 // on utilise la méthode listen sur l'instance app pour écouter et lancer notre serveur sur le port 9000
-app.listen(9000, ()=>{
-    console.log(`Listening at http://localhost:9000`);
-})
+app.listen(PORT, ()=>{
+    console.log(`Listening at http://localhost:${PORT}`);
+});

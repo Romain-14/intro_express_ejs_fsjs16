@@ -1,3 +1,10 @@
 
 <h2>dis'is my home</h2>
-<p>Welcome home <%= data %></p>
+
+<section>
+    <% for( const data of datas) { %>
+        <h3><%= data.productLine %></h3>
+        <p><%= data.textDescription %></p>
+    <% } %>
+</section>
+
